@@ -76,20 +76,17 @@ static word homePage() {
   return bfill.position();
 }
 
-void WebServer() {
   word len = ether.packetReceive();
   word pos = ether.packetLoop(len);
-
-  if (pos) {
-    tipo_requisicao = 1; // Both requests will display the same data
-    ether.httpServerReply(homePage());
-  }
-}
+  ether.httpServerReply(homePage());
+  
 
 void loop() {
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
-    WebServer();
+    word len = ether.packetReceive();
+    word pos = ether.packetLoop(len);
+    ether.httpServerReply(homePage());
   }
 }
