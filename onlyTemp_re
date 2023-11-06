@@ -76,11 +76,6 @@ static word homePage() {
   return bfill.position();
 }
 
-  word len = ether.packetReceive();
-  word pos = ether.packetLoop(len);
-  ether.httpServerReply(homePage());
-  
-
 void loop() {
   unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
